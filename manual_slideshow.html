@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>
+Slideshow
+</title>
+</head>
+
+<body>
+<div id="image-container">
+
+
+<p id="prev" class="button" onclick="slideShow_prev()">
+&#10094;
+</p>
+
+<p id="next" class="button" onclick="slideShow_next()">
+&#10095;
+</p>
+<img id="the_image" src="swamp-thing.jpg" alt=""/>
+<p id="caption">
+caption
+</p>
+</div>
+<script>
+var imgArray = [];	//store images as strings in array
+var captions=[];	//store corresponding caption in corresponding array index (if none, enter empty string)
+var curIndex=0;
+
+function slideShow_next() { //next image
+	if (curIndex<(imgArray.length-1)){
+		curIndex+=1;
+		document.getElementById('the_image').src = imgArray[curIndex];
+		document.getElementById('caption').innerHTML=captions[curIndex];
+		
+	}
+	
+    else{ 
+		curIndex = 0;
+		document.getElementById('the_image').src = imgArray[curIndex];
+		document.getElementById('caption').innerHTML=captions[curIndex];
+	}
+    
+}
+function slideShow_prev() { //previous image
+	if (curIndex>0){
+		curIndex-=1;
+		document.getElementById('the_image').src = imgArray[curIndex];
+		document.getElementById('caption').innerHTML=captions[curIndex];
+		
+	}
+	
+    else{ 
+		curIndex = (imgArray.length-1);
+		document.getElementById('the_image').src = imgArray[curIndex];
+		document.getElementById('caption').innerHTML=captions[curIndex];
+	}
+    
+}
+
+document.addEventListener("keydown",(event)=> /* pass keypress to function*/{	
+			
+			switch(event.keyCode){
+				case 37:	//left key
+					slideShow_prev();
+					break;
+				case 39:	//right key
+					slideShow_next();
+					break;
+				
+			}
+		});
+</script>
+
+<style>
+html{
+	background-image: radial-gradient(gray, black);
+}
+
+body{
+	padding:0;
+	margin:0;
+}
+
+#image-container{
+	 width:100vw;
+	 height:100vh;
+	 text-align:center;
+}
+
+#prev{
+	font-size:80;
+	position:absolute;
+	top:25%;
+	left:0;
+	color:white;
+	background-color:rgba(230,230,230,0.6);
+	max-height:20%;
+	cursor:pointer;
+}
+
+#next{
+	font-size:80;
+	position:absolute;
+	top:25%;
+	right:0;
+	color:white;
+	background-color:rgba(230,230,230,0.6);
+	max-height:20%;
+	cursor:pointer;
+}
+
+#the_image{
+	max-width:100%;
+	max-height:100%;
+	position:absolute;
+	bottom:0;
+	top:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+#caption{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	color:white;
+}
+</style>
+</body>
+</html>
